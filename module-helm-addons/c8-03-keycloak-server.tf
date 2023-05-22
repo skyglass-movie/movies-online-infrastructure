@@ -24,7 +24,7 @@ resource "kubernetes_deployment_v1" "keycloak_server" {
       }
       spec {
         container {
-          image = "quay.io/keycloak/keycloak:20.0.3"
+          image = "quay.io/keycloak/keycloak:21.1.1"
           name  = "keycloak-server"
           args  = ["start-dev"]
           #image_pull_policy = "always"  # Defaults to Always so we can comment this

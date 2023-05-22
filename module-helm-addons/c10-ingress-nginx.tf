@@ -41,13 +41,13 @@ resource "kubernetes_ingress_v1" "ingress" {
     }
 
     rule {
-      host = "bank-api.greeta.net"
+      host = "movies-api.greeta.net"
       http {
 
         path {
           backend {
             service {
-              name = "bank-api"
+              name = "movies-api"
               port {
                 number = 8081
               }
@@ -61,13 +61,13 @@ resource "kubernetes_ingress_v1" "ingress" {
     } 
 
     rule {
-      host = "bank.greeta.net"
+      host = "movies.greeta.net"
       http {
 
         path {
           backend {
             service {
-              name = "bank-ui"
+              name = "movies-ui"
               port {
                 number = 4200
               }
