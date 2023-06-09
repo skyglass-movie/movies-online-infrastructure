@@ -34,7 +34,7 @@ resource "kubernetes_deployment_v1" "movies_mongodb_deployment" {
   
 }
 
-# Resource: Bank MySQL Horizontal Pod Autoscaler
+# Resource: Movies MongoDB Horizontal Pod Autoscaler
 resource "kubernetes_horizontal_pod_autoscaler_v1" "movies_mongodb_hpa" {
   metadata {
     name = "movies-mongodb-hpa"
@@ -51,7 +51,7 @@ resource "kubernetes_horizontal_pod_autoscaler_v1" "movies_mongodb_hpa" {
   }
 }
 
-# Resource: Bank MySQL Cluster IP Service
+# Resource: Movies MongoDB Cluster IP Service
 resource "kubernetes_service_v1" "movies_mongodb_service" {
   metadata {
     name = "movies-mongodb"

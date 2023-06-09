@@ -22,7 +22,7 @@ resource "kubernetes_deployment_v1" "movies_api_deployment" {
       }
       spec {
         container {
-          image = "skyglass-movie/movies-online-api:0.0.1-SNAPSHOT"
+          image = "ghcr.io/skyglass-movie/movies-online-api:6616d3676352b9957695f0ae1edb20dae94c552c"
           name  = "movies-api"
           image_pull_policy = "Always"
           port {

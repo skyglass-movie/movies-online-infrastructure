@@ -1,11 +1,9 @@
-# Install Keycloak Server using Kubernetes Deployment
-# Resource: Keycloak Kubernetes Deployment
-resource "kubernetes_deployment_v1" "bank_ui_deployment" {
-  depends_on = [kubernetes_deployment_v1.bank_api_deployment]
+resource "kubernetes_deployment_v1" "movies_ui_deployment" {
+  depends_on = [kubernetes_deployment_v1.movies_ui_deployment]
   metadata {
-    name = "bank-ui"
+    name = "movies-ui"
     labels = {
-      app = "bank-ui"
+      app = "movies-ui"
     }
   }
  
@@ -13,19 +11,19 @@ resource "kubernetes_deployment_v1" "bank_ui_deployment" {
     replicas = 1
     selector {
       match_labels = {
-        app = "bank-ui"
+        app = "movies-ui"
       }
     }
     template {
       metadata {
         labels = {
-          app = "bank-ui"
+          app = "movies-ui"
         }
       }
       spec {
         container {
-          image = "skyglass/bank-online-ui:latest"
-          name  = "bank-ui"
+          image = "ghcr.io/skyglass-movie/movies-online-ui:6aff98503b4087ba5f0da115a636eadd84a189a6"
+          name  = "movies-ui"
           image_pull_policy = "Always"
           port {
             container_port = 4200
@@ -37,9 +35,9 @@ resource "kubernetes_deployment_v1" "bank_ui_deployment" {
 }
 
 # Resource: Keycloak Server Horizontal Pod Autoscaler
-resource "kubernetes_horizontal_pod_autoscaler_v1" "bank_ui_hpa" {
+resource "kubernetes_horizontal_pod_autoscaler_v1" "movies_ui_hpa" {
   metadata {
-    name = "bank-ui-hpa"
+    name = "movies-ui-hpa"
   }
   spec {
     max_replicas = 2
@@ -47,19 +45,19 @@ resource "kubernetes_horizontal_pod_autoscaler_v1" "bank_ui_hpa" {
     scale_target_ref {
       api_version = "apps/v1"
       kind = "Deployment"
-      name = kubernetes_deployment_v1.bank_ui_deployment.metadata[0].name 
+      name = kubernetes_deployment_v1.movies_ui_deployment.metadata[0].name
     }
     target_cpu_utilization_percentage = 50
   }
 }
 
-resource "kubernetes_service_v1" "bank_ui_service" {
+resource "kubernetes_service_v1" "movies_ui_service" {
   metadata {
-    name = "bank-ui"
+    name = "movies-ui"
   }
   spec {
     selector = {
-      app = "bank-ui"
+      app = "movies-ui"
     }
     port {
       port = 4200
