@@ -39,6 +39,10 @@ resource "kubernetes_deployment_v1" "keycloak_server" {
             name = "KEYCLOAK_ADMIN_PASSWORD"
             value = "admin"
           }
+           env {
+            name = "KEYCLOAK_SSL_REQUIRED"
+            value = "external"
+          }         
           env {
             name = "KC_DB"
             value = "postgres"

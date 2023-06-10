@@ -22,7 +22,7 @@ resource "kubernetes_deployment_v1" "movies_api_deployment" {
       }
       spec {
         container {
-          image = "ghcr.io/skyglass-movie/movies-online-api:6616d3676352b9957695f0ae1edb20dae94c552c"
+          image = "ghcr.io/skyglass-movie/movies-online-api:eab411e130afb84dc3c2fc55b9e092da3e2a900e"
           name  = "movies-api"
           image_pull_policy = "Always"
           port {
@@ -31,7 +31,15 @@ resource "kubernetes_deployment_v1" "movies_api_deployment" {
           env {
             name = "SPRING_DATA_MONGODB_URI"
             value = "mongodb://movies-mongodb:27017/moviesdb"
-          }                                                                                                       
+          }  
+          env {
+            name = "SPRING_KEYCLOAK_SERVER_URL"
+            value = "https://keycloak.greeta.net"
+          }   
+           env {
+            name = "MOVIES_APP_BASE_URL"
+            value = "https://movies.greeta.net"
+          }                                                                                                                                      
         }
       }
     }
