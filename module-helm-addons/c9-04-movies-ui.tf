@@ -1,5 +1,5 @@
 resource "kubernetes_deployment_v1" "movies_ui_deployment" {
-  depends_on = [kubernetes_deployment_v1.movies_ui_deployment]
+  depends_on = [kubernetes_deployment_v1.movies_api_deployment]
   metadata {
     name = "movies-ui"
     labels = {
@@ -22,7 +22,7 @@ resource "kubernetes_deployment_v1" "movies_ui_deployment" {
       }
       spec {
         container {
-          image = "ghcr.io/skyglass-movie/movies-online-ui:6aff98503b4087ba5f0da115a636eadd84a189a6"
+          image = "ghcr.io/skyglass-movie/movies-online-ui:1636a1e9b0b611861d96ceac0dd582fa77a3929d"
           name  = "movies-ui"
           image_pull_policy = "Always"
           port {

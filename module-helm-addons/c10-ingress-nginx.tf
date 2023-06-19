@@ -4,7 +4,7 @@ resource "kubernetes_ingress_v1" "ingress" {
     name = "simple-fanout-ingress"
     annotations = {
       "nginx.ingress.kubernetes.io/rewrite-target" = "/"
-      "kubernetes.io/ingress.class" =  "nginx"     
+      "kubernetes.io/ingress.class" =  "nginx"
     }
   }
 
