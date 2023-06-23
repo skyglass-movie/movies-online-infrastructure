@@ -39,7 +39,7 @@ resource "kubernetes_deployment_v1" "movies_api_deployment" {
           env {
             name = "MOVIES_APP_BASE_URL"
             value = "https://movies.greeta.net"
-           }                                                                                          
+          }                                                                                          
         }
       }
     }
